@@ -1,0 +1,58 @@
+[
+  {
+    "id": "o1",
+    "student_id": "s1",
+    "teacher": "Science",
+    "tags": ["grade_drop", "distracted"],
+    "note": "Failed last test, was scoring 80%+ consistently",
+    "date": "2026-03-22"
+  },
+  {
+    "id": "o2",
+    "student_id": "s1",
+    "teacher": "Homeroom",
+    "tags": ["withdrawn", "absent"],
+    "note": "Missed 2 days this week, very quiet when present",
+    "date": "2026-03-23"
+  },
+  {
+    "id": "o3",
+    "student_id": "s1",
+    "teacher": "Math",
+    "tags": ["grade_drop"],
+    "note": "Submitted incomplete homework, unusual for him",
+    "date": "2026-03-26"
+  },
+  {
+    "id": "o4",
+    "student_id": "s3",
+    "teacher": "Homeroom",
+    "tags": ["absent"],
+    "note": "Frequently absent, no communication from home",
+    "date": "2026-03-25"
+  },
+  {
+    "id": "o5",
+    "student_id": "s7",
+    "teacher": "English",
+    "tags": ["absent"],
+    "note": "Hasn't attended in almost a week",
+    "date": "2026-03-24"
+  },
+  {
+    "id": "o6",
+    "student_id": "s7",
+    "teacher": "Math",
+    "tags": ["absent", "grade_drop"],
+    "note": "Missing assignments piling up",
+    "date": "2026-03-25"
+  },
+  {
+    "id": "o7",
+    "student_id": "s9",
+    "teacher": "Science",
+    "tags": ["distracted", "withdrawn"],
+    "note": "Seems disengaged in class, staring out the window",
+    "date": "2026-03-24"
+  }
+]

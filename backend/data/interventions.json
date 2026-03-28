@@ -1,0 +1,11 @@
+[
+  {
+    "id": "i1",
+    "student_id": "s1",
+    "counselor": "Ms. Karki",
+    "type": "check_in",
+    "note": "Spoke with Aarav briefly. He mentioned things are difficult at home. Scheduled follow-up.",
+    "date": "2026-03-24",
+    "status": "in_progress"
+  }
+]

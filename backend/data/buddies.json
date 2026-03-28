@@ -1,0 +1,12 @@
+[
+  { "student_id": "s1",  "buddy_id": "s3",  "assigned_date": "2026-03-01" },
+  { "student_id": "s3",  "buddy_id": "s1",  "assigned_date": "2026-03-01" },
+  { "student_id": "s6",  "buddy_id": "s9",  "assigned_date": "2026-03-01" },
+  { "student_id": "s9",  "buddy_id": "s6",  "assigned_date": "2026-03-01" },
+  { "student_id": "s2",  "buddy_id": "s4",  "assigned_date": "2026-03-01" },
+  { "student_id": "s4",  "buddy_id": "s2",  "assigned_date": "2026-03-01" },
+  { "student_id": "s5",  "buddy_id": "s8",  "assigned_date": "2026-03-01" },
+  { "student_id": "s8",  "buddy_id": "s5",  "assigned_date": "2026-03-01" },
+  { "student_id": "s10", "buddy_id": "s7",  "assigned_date": "2026-03-01" },
+  { "student_id": "s7",  "buddy_id": "s10", "assigned_date": "2026-03-01" }
+]

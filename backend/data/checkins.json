@@ -1,0 +1,986 @@
+[
+  {
+    "id": "c001",
+    "student_id": "s1",
+    "date": "2026-03-15",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c002",
+    "student_id": "s1",
+    "date": "2026-03-16",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c003",
+    "student_id": "s1",
+    "date": "2026-03-17",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c004",
+    "student_id": "s1",
+    "date": "2026-03-18",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c005",
+    "student_id": "s1",
+    "date": "2026-03-19",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c006",
+    "student_id": "s1",
+    "date": "2026-03-20",
+    "mood": 3,
+    "energy": "low",
+    "note": "घरमा झगडा भइरहेको छ"
+  },
+  {
+    "id": "c007",
+    "student_id": "s1",
+    "date": "2026-03-21",
+    "mood": 2,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c008",
+    "student_id": "s1",
+    "date": "2026-03-22",
+    "mood": 2,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c009",
+    "student_id": "s1",
+    "date": "2026-03-23",
+    "mood": 1,
+    "energy": "low",
+    "note": "कसैले बुझ्दैन"
+  },
+  {
+    "id": "c010",
+    "student_id": "s1",
+    "date": "2026-03-24",
+    "mood": 2,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c011",
+    "student_id": "s1",
+    "date": "2026-03-25",
+    "mood": 1,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c012",
+    "student_id": "s1",
+    "date": "2026-03-28",
+    "mood": 1,
+    "energy": "low",
+    "note": "सबै बेकार छ"
+  },
+  {
+    "id": "c013",
+    "student_id": "s2",
+    "date": "2026-03-15",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c014",
+    "student_id": "s2",
+    "date": "2026-03-16",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c015",
+    "student_id": "s2",
+    "date": "2026-03-17",
+    "mood": 4,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c016",
+    "student_id": "s2",
+    "date": "2026-03-18",
+    "mood": 5,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c017",
+    "student_id": "s2",
+    "date": "2026-03-19",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c018",
+    "student_id": "s2",
+    "date": "2026-03-20",
+    "mood": 5,
+    "energy": "high",
+    "note": "आज राम्रो दिन"
+  },
+  {
+    "id": "c019",
+    "student_id": "s2",
+    "date": "2026-03-21",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c020",
+    "student_id": "s2",
+    "date": "2026-03-22",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c021",
+    "student_id": "s2",
+    "date": "2026-03-23",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c022",
+    "student_id": "s2",
+    "date": "2026-03-24",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c023",
+    "student_id": "s2",
+    "date": "2026-03-25",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c024",
+    "student_id": "s2",
+    "date": "2026-03-26",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c025",
+    "student_id": "s2",
+    "date": "2026-03-27",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c026",
+    "student_id": "s2",
+    "date": "2026-03-28",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c027",
+    "student_id": "s3",
+    "date": "2026-03-15",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c028",
+    "student_id": "s3",
+    "date": "2026-03-17",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c029",
+    "student_id": "s3",
+    "date": "2026-03-19",
+    "mood": 4,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c030",
+    "student_id": "s3",
+    "date": "2026-03-21",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c031",
+    "student_id": "s3",
+    "date": "2026-03-24",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c032",
+    "student_id": "s3",
+    "date": "2026-03-26",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c033",
+    "student_id": "s3",
+    "date": "2026-03-28",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c034",
+    "student_id": "s4",
+    "date": "2026-03-15",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c035",
+    "student_id": "s4",
+    "date": "2026-03-16",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c036",
+    "student_id": "s4",
+    "date": "2026-03-17",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c037",
+    "student_id": "s4",
+    "date": "2026-03-18",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c038",
+    "student_id": "s4",
+    "date": "2026-03-19",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c039",
+    "student_id": "s4",
+    "date": "2026-03-20",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c040",
+    "student_id": "s4",
+    "date": "2026-03-21",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c041",
+    "student_id": "s4",
+    "date": "2026-03-22",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c042",
+    "student_id": "s4",
+    "date": "2026-03-23",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c043",
+    "student_id": "s4",
+    "date": "2026-03-24",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c044",
+    "student_id": "s4",
+    "date": "2026-03-25",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c045",
+    "student_id": "s4",
+    "date": "2026-03-26",
+    "mood": 3,
+    "energy": "low",
+    "note": "अलि थकित"
+  },
+  {
+    "id": "c046",
+    "student_id": "s4",
+    "date": "2026-03-27",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c047",
+    "student_id": "s4",
+    "date": "2026-03-28",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c048",
+    "student_id": "s5",
+    "date": "2026-03-15",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c049",
+    "student_id": "s5",
+    "date": "2026-03-16",
+    "mood": 4,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c050",
+    "student_id": "s5",
+    "date": "2026-03-17",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c051",
+    "student_id": "s5",
+    "date": "2026-03-18",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c052",
+    "student_id": "s5",
+    "date": "2026-03-19",
+    "mood": 4,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c053",
+    "student_id": "s5",
+    "date": "2026-03-20",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c054",
+    "student_id": "s5",
+    "date": "2026-03-21",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c055",
+    "student_id": "s5",
+    "date": "2026-03-22",
+    "mood": 4,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c056",
+    "student_id": "s5",
+    "date": "2026-03-23",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c057",
+    "student_id": "s5",
+    "date": "2026-03-24",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c058",
+    "student_id": "s5",
+    "date": "2026-03-25",
+    "mood": 4,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c059",
+    "student_id": "s5",
+    "date": "2026-03-26",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c060",
+    "student_id": "s6",
+    "date": "2026-03-15",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c061",
+    "student_id": "s6",
+    "date": "2026-03-16",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c062",
+    "student_id": "s6",
+    "date": "2026-03-17",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c063",
+    "student_id": "s6",
+    "date": "2026-03-18",
+    "mood": 4,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c064",
+    "student_id": "s6",
+    "date": "2026-03-19",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c065",
+    "student_id": "s6",
+    "date": "2026-03-20",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c066",
+    "student_id": "s6",
+    "date": "2026-03-21",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c067",
+    "student_id": "s6",
+    "date": "2026-03-22",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c068",
+    "student_id": "s6",
+    "date": "2026-03-23",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c069",
+    "student_id": "s6",
+    "date": "2026-03-24",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c070",
+    "student_id": "s6",
+    "date": "2026-03-25",
+    "mood": 4,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c071",
+    "student_id": "s6",
+    "date": "2026-03-26",
+    "mood": 5,
+    "energy": "high",
+    "note": "आज धेरै रमाइलो"
+  },
+  {
+    "id": "c072",
+    "student_id": "s6",
+    "date": "2026-03-27",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c073",
+    "student_id": "s7",
+    "date": "2026-03-15",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c074",
+    "student_id": "s7",
+    "date": "2026-03-16",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c075",
+    "student_id": "s7",
+    "date": "2026-03-17",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c076",
+    "student_id": "s7",
+    "date": "2026-03-18",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c077",
+    "student_id": "s7",
+    "date": "2026-03-19",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c078",
+    "student_id": "s7",
+    "date": "2026-03-20",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c079",
+    "student_id": "s7",
+    "date": "2026-03-21",
+    "mood": 2,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c080",
+    "student_id": "s7",
+    "date": "2026-03-22",
+    "mood": 2,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c081",
+    "student_id": "s8",
+    "date": "2026-03-15",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c082",
+    "student_id": "s8",
+    "date": "2026-03-16",
+    "mood": 4,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c083",
+    "student_id": "s8",
+    "date": "2026-03-17",
+    "mood": 5,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c084",
+    "student_id": "s8",
+    "date": "2026-03-18",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c085",
+    "student_id": "s8",
+    "date": "2026-03-19",
+    "mood": 4,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c086",
+    "student_id": "s8",
+    "date": "2026-03-20",
+    "mood": 5,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c087",
+    "student_id": "s8",
+    "date": "2026-03-21",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c088",
+    "student_id": "s8",
+    "date": "2026-03-22",
+    "mood": 4,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c089",
+    "student_id": "s8",
+    "date": "2026-03-23",
+    "mood": 5,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c090",
+    "student_id": "s8",
+    "date": "2026-03-24",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c091",
+    "student_id": "s8",
+    "date": "2026-03-25",
+    "mood": 4,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c092",
+    "student_id": "s8",
+    "date": "2026-03-26",
+    "mood": 5,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c093",
+    "student_id": "s8",
+    "date": "2026-03-27",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c094",
+    "student_id": "s8",
+    "date": "2026-03-28",
+    "mood": 4,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c095",
+    "student_id": "s9",
+    "date": "2026-03-15",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c096",
+    "student_id": "s9",
+    "date": "2026-03-16",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c097",
+    "student_id": "s9",
+    "date": "2026-03-17",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c098",
+    "student_id": "s9",
+    "date": "2026-03-18",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c099",
+    "student_id": "s9",
+    "date": "2026-03-19",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c100",
+    "student_id": "s9",
+    "date": "2026-03-20",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c101",
+    "student_id": "s9",
+    "date": "2026-03-21",
+    "mood": 2,
+    "energy": "low",
+    "note": "स्कुल आउन मन छैन"
+  },
+  {
+    "id": "c102",
+    "student_id": "s9",
+    "date": "2026-03-22",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c103",
+    "student_id": "s9",
+    "date": "2026-03-23",
+    "mood": 2,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c104",
+    "student_id": "s9",
+    "date": "2026-03-24",
+    "mood": 2,
+    "energy": "low",
+    "note": "मलाई केही मन लाग्दैन"
+  },
+  {
+    "id": "c105",
+    "student_id": "s9",
+    "date": "2026-03-25",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c106",
+    "student_id": "s9",
+    "date": "2026-03-26",
+    "mood": 2,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c107",
+    "student_id": "s9",
+    "date": "2026-03-27",
+    "mood": 2,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c108",
+    "student_id": "s9",
+    "date": "2026-03-28",
+    "mood": 2,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c109",
+    "student_id": "s10",
+    "date": "2026-03-15",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c110",
+    "student_id": "s10",
+    "date": "2026-03-16",
+    "mood": 4,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c111",
+    "student_id": "s10",
+    "date": "2026-03-17",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c112",
+    "student_id": "s10",
+    "date": "2026-03-18",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c113",
+    "student_id": "s10",
+    "date": "2026-03-20",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c114",
+    "student_id": "s10",
+    "date": "2026-03-21",
+    "mood": 4,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c115",
+    "student_id": "s10",
+    "date": "2026-03-22",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c116",
+    "student_id": "s10",
+    "date": "2026-03-23",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c117",
+    "student_id": "s10",
+    "date": "2026-03-25",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c118",
+    "student_id": "s10",
+    "date": "2026-03-26",
+    "mood": 3,
+    "energy": "medium",
+    "note": ""
+  },
+  {
+    "id": "c119",
+    "student_id": "s10",
+    "date": "2026-03-27",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c120",
+    "student_id": "s10",
+    "date": "2026-03-28",
+    "mood": 3,
+    "energy": "low",
+    "note": ""
+  },
+  {
+    "id": "c-97bba012",
+    "student_id": "s1",
+    "date": "2026-03-28",
+    "mood": 3,
+    "energy": "medium",
+    "note": "nope"
+  },
+  {
+    "id": "c-46ccde85",
+    "student_id": "s1",
+    "date": "2026-03-28",
+    "mood": 5,
+    "energy": "high",
+    "note": ""
+  },
+  {
+    "id": "c-1d644410",
+    "student_id": "s1",
+    "date": "2026-03-28",
+    "mood": 1,
+    "energy": "medium",
+    "note": ""
+  }
+]
