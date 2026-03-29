@@ -73,5 +73,11 @@ export const getCreativeTask = (studentId) =>
 export const getBuddy = (studentId) =>
   request(`/buddies/${studentId}`);
 
+export const getCrisisAlerts = () => request("/crisis-alerts");
+export const acknowledgeCrisisAlert = (alertId) =>
+  request(`/crisis-alerts/${alertId}/acknowledge`, { method: "POST" });
+
+export const pollDashboard = () => request("/dashboard/poll");
+
 export const getSchoolAnalytics = () => request("/analytics/school");
 export const getClassAnalytics = () => request("/analytics/by-class");

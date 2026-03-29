@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import { getStudents, submitCheckin } from "../api";
+import { useLanguage } from "../i18n";
 import { Check, ChevronDown } from "lucide-react";
 
 const MOODS = [
-  { value: 1, label: "Struggling" },
-  { value: 2, label: "Not great" },
-  { value: 3, label: "Okay" },
-  { value: 4, label: "Good" },
-  { value: 5, label: "Great" },
+  { value: 1, labelKey: "mood_1" },
+  { value: 2, labelKey: "mood_2" },
+  { value: 3, labelKey: "mood_3" },
+  { value: 4, labelKey: "mood_4" },
+  { value: 5, labelKey: "mood_5" },
 ];
 
 const ENERGY = [
-  { value: "low", label: "Low" },
-  { value: "medium", label: "Medium" },
-  { value: "high", label: "High" },
+  { value: "low", labelKey: "energy_low" },
+  { value: "medium", labelKey: "energy_medium" },
+  { value: "high", labelKey: "energy_high" },
 ];
 
 export default function CheckIn() {
@@ -25,6 +26,7 @@ export default function CheckIn() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const { t } = useLanguage();
 
   useEffect(() => {
     getStudents().then(setStudents).catch(console.error);
@@ -62,14 +64,16 @@ export default function CheckIn() {
           <Check size={22} strokeWidth={2} className="text-gray-600" />
         </div>
         <h2 className="text-lg font-semibold text-gray-900 mb-0.5">
-          Check-in recorded for {name}
+          {t("checkin_thanks") || `Check-in recorded for ${name}`}
         </h2>
-        <p className="text-sm text-gray-400">Response has been saved</p>
+        <p className="text-sm text-gray-400">
+          {t("checkin_recorded") || "Response has been saved"}
+        </p>
         <button
           onClick={handleReset}
           className="mt-6 px-4 py-2 text-sm text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
         >
-          Check in another student
+          {t("checkin_again") || "Check in another student"}
         </button>
       </div>
     );
@@ -78,20 +82,26 @@ export default function CheckIn() {
   return (
     <div className="max-w-lg mx-auto">
       <div className="mb-6">
-        <h1 className="text-xl font-semibold text-gray-900">Student Check-in</h1>
-        <p className="text-sm text-gray-400 mt-0.5">Record a student's mood, energy, and notes</p>
+        <h1 className="text-xl font-semibold text-gray-900">
+          {t("checkin_mood_title") || "Student Check-in"}
+        </h1>
+        <p className="text-sm text-gray-400 mt-0.5">
+          {t("checkin_mood_subtitle") || "Record a student's mood, energy, and notes"}
+        </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Student</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            {t("obs_student_label") || "Student"}
+          </label>
           <div className="relative">
             <select
               value={studentId}
               onChange={(e) => setStudentId(e.target.value)}
               className="w-full appearance-none px-4 py-2.5 border border-gray-200 rounded-lg text-sm text-gray-900 focus:outline-none focus:border-gray-400 bg-white"
             >
-              <option value="">Select a student</option>
+              <option value="">{t("obs_select_student") || "Select a student"}</option>
               {students.map((s) => (
                 <option key={s.id} value={s.id}>
                   {s.name} — {s.class}
@@ -106,7 +116,9 @@ export default function CheckIn() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Mood</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {t("checkin_mood_title") || "Mood"}
+          </label>
           <div className="flex gap-2">
             {MOODS.map((m) => (
               <button
@@ -119,14 +131,16 @@ export default function CheckIn() {
                     : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
                 }`}
               >
-                {m.label}
+                {t(m.labelKey)}
               </button>
             ))}
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Energy</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {t("checkin_energy_title") || "Energy"}
+          </label>
           <div className="flex gap-2">
             {ENERGY.map((e) => (
               <button
@@ -139,7 +153,7 @@ export default function CheckIn() {
                     : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
                 }`}
               >
-                {e.label}
+                {t(e.labelKey)}
               </button>
             ))}
           </div>
@@ -147,13 +161,14 @@ export default function CheckIn() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">
-            Notes <span className="text-gray-400 font-normal">(optional)</span>
+            {t("checkin_note_title") || "Notes"}{" "}
+            <span className="text-gray-400 font-normal">({t("obs_notes_optional") || "optional"})</span>
           </label>
           <textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
             rows={3}
-            placeholder="Any observations or student comments..."
+            placeholder={t("obs_notes_placeholder") || "Any observations or student comments..."}
             className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 resize-none"
           />
         </div>
@@ -167,7 +182,7 @@ export default function CheckIn() {
           disabled={!studentId || !mood || !energy || submitting}
           className="w-full px-4 py-3 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
-          {submitting ? "Saving..." : "Submit check-in"}
+          {submitting ? t("submitting") : t("checkin_submit") || "Submit check-in"}
         </button>
       </form>
     </div>

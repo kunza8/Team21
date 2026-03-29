@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { getStudents, getWatchlist, getSchoolAnalytics, getClassAnalytics } from "../api";
+import { getStudents, getWatchlist, getCrisisAlerts, acknowledgeCrisisAlert, pollDashboard, getSchoolAnalytics, getClassAnalytics } from "../api";
+import { useLanguage } from "../i18n";
 import { useAuth } from "../contexts/AuthContext";
 import {
   AlertTriangle,
@@ -9,6 +10,10 @@ import {
   Users,
   TrendingDown,
   ShieldCheck,
+  Siren,
+  Phone,
+  X,
+  Bell,
   BarChart3,
 } from "lucide-react";
 
@@ -43,6 +48,88 @@ function StatCard({ label, value, icon: Icon }) {
   );
 }
 
+function CrisisAlertBanner({ alerts, onAcknowledge }) {
+  const { t } = useLanguage();
+
+  if (alerts.length === 0) return null;
+
+  return (
+    <div className="mb-6 space-y-2">
+      {alerts.map((alert) => (
+        <div
+          key={alert.id}
+          className="bg-red-50 border-2 border-red-300 rounded-lg p-4 animate-pulse-slow"
+        >
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+              <Siren size={18} className="text-red-600" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-sm font-semibold text-red-800">
+                  {t("crisis_alert")}
+                </span>
+                <span className="px-2 py-0.5 text-[10px] font-bold bg-red-200 text-red-800 rounded-full uppercase">
+                  {alert.trigger === "keyword_detected" ? "Keyword" : "Pattern"}
+                </span>
+              </div>
+              <p className="text-sm text-red-700">
+                <Link to={`/students/${alert.student_id}`} className="font-medium underline hover:no-underline">
+                  {alert.student_name}
+                </Link>
+                {" "}({t("th_class")} {alert.student_class}) — Mood: {alert.mood}/5
+              </p>
+              {alert.note_preview && (
+                <p className="text-xs text-red-600 mt-1 italic">
+                  &quot;{alert.note_preview}&quot;
+                </p>
+              )}
+              <div className="flex items-center gap-2 mt-2">
+                <Phone size={12} className="text-red-500" />
+                <span className="text-xs text-red-600">
+                  {t("crisis_helpline")}
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <Link
+                to={`/students/${alert.student_id}`}
+                className="px-3 py-1.5 text-xs font-medium bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                {t("crisis_view")}
+              </Link>
+              <button
+                onClick={() => onAcknowledge(alert.id)}
+                className="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-100 rounded-lg transition-colors"
+                title={t("crisis_dismiss")}
+              >
+                <X size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Toast({ message, onClose }) {
+  useEffect(() => {
+    const timer = setTimeout(onClose, 5000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    <div className="fixed top-4 right-4 z-50 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 shadow-lg flex items-center gap-3 animate-slide-in">
+      <Bell size={16} className="text-amber-500" />
+      <span className="text-sm text-amber-800">{message}</span>
+      <button onClick={onClose} className="text-amber-400 hover:text-amber-600">
+        <X size={14} />
+      </button>
+    </div>
+  );
+}
+
 function RiskBar({ distribution, total }) {
   if (!total) return null;
   const levels = ["low", "moderate", "high", "crisis"];
@@ -66,26 +153,72 @@ export default function Dashboard() {
 
   const [students, setStudents] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
+  const [crisisAlerts, setCrisisAlerts] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState(null);
+  const [lastCheckinCount, setLastCheckinCount] = useState(null);
   const [schoolStats, setSchoolStats] = useState(null);
   const [classBreakdown, setClassBreakdown] = useState([]);
+  const { t } = useLanguage();
 
-  useEffect(() => {
-    const promises = [getStudents(), getWatchlist()];
+  const loadData = useCallback(() => {
+    const promises = [getStudents(), getWatchlist(), getCrisisAlerts()];
     if (isCounselor) {
       promises.push(getSchoolAnalytics(), getClassAnalytics());
     }
-    Promise.all(promises)
-      .then(([s, w, school, classes]) => {
+    return Promise.all(promises)
+      .then(([s, w, c, school, classes]) => {
         setStudents(s);
         setWatchlist(w);
+        setCrisisAlerts(c);
         if (school) setSchoolStats(school);
         if (classes) setClassBreakdown(classes);
       })
-      .catch(console.error)
-      .finally(() => setLoading(false));
+      .catch(console.error);
   }, [isCounselor]);
+
+  useEffect(() => {
+    loadData().finally(() => setLoading(false));
+  }, [loadData]);
+
+  // Poll every 15 seconds for new data
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      try {
+        const poll = await pollDashboard();
+
+        // Show toast if new check-ins arrived
+        if (lastCheckinCount !== null && poll.total_checkins > lastCheckinCount) {
+          const diff = poll.total_checkins - lastCheckinCount;
+          setToast(`${diff} new check-in${diff > 1 ? "s" : ""} received`);
+          loadData();
+        }
+        setLastCheckinCount(poll.total_checkins);
+
+        // Refresh crisis alerts
+        if (poll.crisis_count > 0) {
+          const alerts = await getCrisisAlerts();
+          setCrisisAlerts(alerts);
+        }
+      } catch (e) {
+        // polling failure is silent
+      }
+    }, 15000);
+
+    pollDashboard().then((p) => setLastCheckinCount(p.total_checkins)).catch(() => {});
+
+    return () => clearInterval(interval);
+  }, [lastCheckinCount, loadData]);
+
+  async function handleAcknowledge(alertId) {
+    try {
+      await acknowledgeCrisisAlert(alertId);
+      setCrisisAlerts((prev) => prev.filter((a) => a.id !== alertId));
+    } catch (e) {
+      console.error("Failed to acknowledge alert:", e);
+    }
+  }
 
   const filtered = students.filter((s) =>
     s.name.toLowerCase().includes(search.toLowerCase())
@@ -103,46 +236,50 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-sm text-gray-400">Loading...</p>
+        <p className="text-sm text-gray-400">{t("loading")}</p>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="mb-6">
+      {toast && <Toast message={toast} onClose={() => setToast(null)} />}
+
+      <div className="mb-8">
         <h1 className="text-xl font-semibold text-gray-900">
-          {role === "teacher" ? "My Class" : "Dashboard"}
+          {role === "teacher" ? t("dash_my_class") || "My Class" : t("dash_title")}
         </h1>
-        <p className="text-sm text-gray-400 mt-0.5">
+        <p className="text-sm text-gray-400 mt-1">
           {role === "teacher"
-            ? "Students assigned to your class"
-            : "School-wide student wellbeing overview"}
+            ? t("dash_teacher_subtitle") || "Students assigned to your class"
+            : t("dash_subtitle")}
         </p>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mb-6">
-        <StatCard label="Total Students" value={stats.total} icon={Users} />
-        <StatCard label="Needs Attention" value={stats.flagged} icon={AlertTriangle} />
-        <StatCard label="High Risk" value={stats.highRisk} icon={TrendingDown} />
-        <StatCard label="Healthy" value={stats.healthy} icon={ShieldCheck} />
+      <CrisisAlertBanner alerts={crisisAlerts} onAcknowledge={handleAcknowledge} />
+
+      <div className="grid grid-cols-4 gap-4 mb-8">
+        <StatCard label={t("dash_total")} value={stats.total} icon={Users} />
+        <StatCard label={t("dash_attention")} value={stats.flagged} icon={AlertTriangle} />
+        <StatCard label={t("dash_high_risk")} value={stats.highRisk} icon={TrendingDown} />
+        <StatCard label={t("dash_healthy")} value={stats.healthy} icon={ShieldCheck} />
       </div>
 
       {isCounselor && classBreakdown.length > 0 && (
-        <div className="mb-6">
+        <div className="mb-8">
           <h2 className="text-sm font-medium text-gray-900 mb-3 flex items-center gap-2">
             <BarChart3 size={14} className="text-gray-400" />
-            Class Comparison
+            {t("dash_class_comparison") || "Class Comparison"}
           </h2>
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-100">
-                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">Class</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">Students</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">Avg Mood</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">Check-ins</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400 w-48">Risk Distribution</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">{t("th_class")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">{t("dash_total")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">{t("th_last_mood")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">{t("th_last_checkin")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400 w-48">{t("th_risk")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
@@ -150,7 +287,7 @@ export default function Dashboard() {
                   <tr key={c.class} className="hover:bg-gray-50 transition-colors">
                     <td className="px-4 py-3 font-medium text-gray-900">{c.class}</td>
                     <td className="px-4 py-3 text-gray-500">{c.student_count}</td>
-                    <td className="px-4 py-3 text-gray-700">{c.avg_mood || "—"}</td>
+                    <td className="px-4 py-3 text-gray-700">{c.avg_mood || "\u2014"}</td>
                     <td className="px-4 py-3 text-gray-500">{c.checkin_count}</td>
                     <td className="px-4 py-3">
                       <RiskBar distribution={c.risk_distribution} total={c.student_count} />
@@ -171,8 +308,10 @@ export default function Dashboard() {
       )}
 
       {watchlist.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-sm font-medium text-gray-900 mb-3">Watchlist</h2>
+        <div className="mb-8">
+          <h2 className="text-sm font-medium text-gray-900 mb-3">
+            {t("dash_watchlist")}
+          </h2>
           <div className="bg-white border border-gray-200 rounded-lg divide-y divide-gray-100">
             {watchlist.map((s) => (
               <Link
@@ -187,8 +326,8 @@ export default function Dashboard() {
                   <div>
                     <p className="text-sm font-medium text-gray-900">{s.name}</p>
                     <p className="text-xs text-gray-400">
-                      Class {s.class}
-                      {s.risk?.concerns?.[0] && ` — ${s.risk.concerns[0]}`}
+                      {t("th_class")} {s.class}
+                      {s.risk?.concerns?.[0] && ` \u2014 ${s.risk.concerns[0]}`}
                     </p>
                   </div>
                 </div>
@@ -204,7 +343,7 @@ export default function Dashboard() {
 
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-medium text-gray-900">All Students</h2>
+          <h2 className="text-sm font-medium text-gray-900">{t("dash_all_students")}</h2>
           <div className="relative">
             <Search
               size={14}
@@ -214,7 +353,7 @@ export default function Dashboard() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search..."
+              placeholder={t("dash_search")}
               className="pl-8 pr-3 py-1.5 text-sm border border-gray-200 rounded-lg bg-white text-gray-700 placeholder-gray-300 focus:outline-none focus:border-gray-400"
             />
           </div>
@@ -223,11 +362,11 @@ export default function Dashboard() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100">
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">Name</th>
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">Class</th>
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">Last Mood</th>
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">Risk</th>
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">Last Check-in</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">{t("th_name")}</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">{t("th_class")}</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">{t("th_last_mood")}</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">{t("th_risk")}</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-400">{t("th_last_checkin")}</th>
                 <th></th>
               </tr>
             </thead>
@@ -243,9 +382,9 @@ export default function Dashboard() {
                     </Link>
                   </td>
                   <td className="px-4 py-3 text-gray-500">{s.class}</td>
-                  <td className="px-4 py-3 text-gray-700">{s.last_mood ?? "—"} / 5</td>
+                  <td className="px-4 py-3 text-gray-700">{s.last_mood ?? "\u2014"} / 5</td>
                   <td className="px-4 py-3"><RiskBadge level={s.risk_level} /></td>
-                  <td className="px-4 py-3 text-gray-400">{s.last_checkin_date || "Never"}</td>
+                  <td className="px-4 py-3 text-gray-400">{s.last_checkin_date || t("never")}</td>
                   <td className="px-4 py-3 text-right">
                     <Link to={`/students/${s.id}`}>
                       <ChevronRight size={16} className="text-gray-300" />
