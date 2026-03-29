@@ -148,7 +148,7 @@ export default function Layout({ role, userName, userEmail, onSignOut, onSwitchA
                   className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-600 hover:bg-red-50 transition-all"
                 >
                   <LogOut size={15} strokeWidth={1.8} />
-                  {t("nav_sign_out") || "Sign out"}
+                  {t("Sign Out") || "Sign out"}
                 </button>
               </div>
             </div>
